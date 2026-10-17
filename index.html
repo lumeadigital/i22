@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>حفل زفاف إبراهيم & أصالة</title>
+
+  <!-- الخطوط الرسمية الفاخرة ومكتبة الأيقونات -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --taupe-rich: #5a483a;
+      --taupe-deep: #2c2119;
+      --taupe-darkest: #19120c;
+      --bead-gold: #cbb291;
+      --bead-light: #f5ede1;
+      --card-bg: rgba(52, 41, 32, 0.84);
+      --card-border: rgba(203, 178, 145, 0.35);
+      --text-main: #fcf9f2;
+      --text-sub: #d3c4b3;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background-color: var(--taupe-darkest);
+      display: flex;
+      justify-content: center;
+      font-family: 'Tajawal', sans-serif;
+      color: var(--text-main);
+      overflow-x: hidden;
+    }
+
+    .mobile-frame {
+      width: 100%;
+      max-width: 440px;
+      min-height: 100vh;
+      position: relative;
+      background: radial-gradient(circle at 50% 30%, #685443 0%, #3a2c22 60%, #1c150f 100%);
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.95);
+    }
+
+    .fabric-canvas {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 440px;
+      height: 100vh;
+      background: 
+        radial-gradient(circle at 50% 5%, rgba(245, 237, 225, 0.22) 0%, transparent 55%),
+        radial-gradient(ellipse at bottom, rgba(203, 178, 145, 0.3) 0%, transparent 65%),
+        linear-gradient(180deg, #5a483a 0%, #3e3025 50%, #1e1610 100%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .fabric-canvas::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: 0;
+      width: 100%;
+      height: 280px;
+      background: radial-gradient(ellipse at 50% 100%, rgba(203, 178, 145, 0.32) 0%, transparent 70%);
+      filter: blur(16px);
+      pointer-events: none;
+    }
+
+    #petals-canvas {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 440px;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .auto-scroll-pill {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 900;
+      background: rgba(52, 41, 32, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(203, 178, 145, 0.4);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.75rem;
+      color: var(--bead-light);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      transition: all 0.3s ease;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .auto-scroll-pill.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* =========================================================
+       شاشة الافتتاح بالختم العاجي
+       ========================================================= */
+    #curtain-screen {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 440px;
+      height: 100vh;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    #curtain-screen.opened {
+      pointer-events: none;
+    }
+
+    .curtain-panel {
+      position: absolute;
+      top: 0;
+      width: 50.5%;
+      height: 100%;
+      background: linear-gradient(180deg, #625041 0%, #46372d 50%, #241b14 100%);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      z-index: 1;
+      transition: transform 1.35s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    .curtain-left {
+      left: 0;
+      border-right: 1px solid rgba(203, 178, 145, 0.3);
+      box-shadow: inset -10px 0 25px rgba(0, 0, 0, 0.45);
+    }
+
+    .curtain-right {
+      right: 0;
+      border-left: 1px solid rgba(203, 178, 145, 0.3);
+      box-shadow: inset 10px 0 25px rgba(0, 0, 0, 0.45);
+    }
+
+    #curtain-screen.opened .curtain-left {
+      transform: translateX(-100%);
+    }
+
+    #curtain-screen.opened .curtain-right {
+      transform: translateX(100%);
+    }
+
+    .seal-center-btn {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: opacity 0.5s ease, transform 0.6s ease;
+    }
+
+    #curtain-screen.opened .seal-center-btn {
+      opacity: 0;
+      transform: scale(1.15);
+    }
+
+    .exact-ivory-seal {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: #faf6f0;
+      box-shadow: 
+        0 18px 45px rgba(20, 14, 9, 0.5), 
+        0 4px 15px rgba(0, 0, 0, 0.25),
+        inset 0 1px 2px rgba(255, 255, 255, 0.95);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 16px;
+      border: 1px solid rgba(180, 155, 125, 0.35);
+      position: relative;
+      animation: sealFloat 4s infinite ease-in-out;
+    }
+
+    @keyframes sealFloat {
+      0%, 100% { transform: scale(1); box-shadow: 0 18px 45px rgba(20, 14, 9, 0.5); }
+      50% { transform: scale(1.02); box-shadow: 0 22px 55px rgba(20, 14, 9, 0.65), 0 0 25px rgba(203, 178, 145, 0.45); }
+    }
+
+    .seal-branches-exact {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: #9d8b78;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      opacity: 0.85;
+    }
+
+    .seal-center-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: -2px 0;
+    }
+
+    .seal-names-exact {
+      font-family: 'Aref Ruqaa', serif;
+      font-size: 1.85rem;
+      color: #382415;
+      line-height: 1.18;
+      font-weight: 700;
+      margin: 4px 0 2px 0;
+      text-align: center;
+    }
+
+    .seal-amp-exact {
+      font-family: 'Amiri', serif;
+      font-size: 1.1rem;
+      color: #8c7359;
+      display: block;
+      margin: -4px 0;
+    }
+
+    .seal-open-exact {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 4px;
+      color: #847262;
+      font-weight: 600;
+      margin-top: 6px;
+    }
+
+    .seal-hint {
+      margin-top: 24px;
+      font-size: 0.92rem;
+      color: var(--bead-light);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(52, 41, 32, 0.88);
+      border: 1px solid rgba(203, 178, 145, 0.4);
+      padding: 8px 20px;
+      border-radius: 24px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+    }
+
+    /* =========================================
+       الأقسام والبطاقات
+       ========================================= */
+    .content-flow {
+      position: relative;
+      z-index: 3;
+      padding: 50px 18px 140px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 55px;
+    }
+
+    .section-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1.5px solid var(--card-border);
+      border-radius: 32px;
+      padding: 45px 22px;
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 20px 50px rgba(18, 12, 8, 0.7), inset 0 1px 2px rgba(255, 255, 255, 0.12);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.9s cubic-bezier(0.2, 0.8, 0.25, 1);
+      position: relative;
+    }
+
+    .section-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-badge-title {
+      font-size: 1.25rem;
+      color: var(--bead-light);
+      font-weight: 700;
+      margin-bottom: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .section-badge-title::before,
+    .section-badge-title::after {
+      content: '';
+      width: 28px;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--bead-gold));
+    }
+    .section-badge-title::after {
+      background: linear-gradient(90deg, var(--bead-gold), transparent);
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: -24px 0;
+      opacity: 0.85;
+    }
+
+    .section-divider .line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to left, rgba(203, 178, 145, 0.55), transparent);
+    }
+
+    .section-divider .line.right {
+      background: linear-gradient(to right, rgba(203, 178, 145, 0.55), transparent);
+    }
+
+    .section-divider .symbol {
+      color: var(--bead-gold);
+      font-size: 1.1rem;
+    }
+
+    /* =========================================
+       الصفحة الأولى الأصلية الصافية
+       ========================================= */
+    .hero-card {
+      min-height: 80vh;
+      background: radial-gradient(circle at 50% 30%, rgba(85, 68, 54, 0.88) 0%, rgba(48, 38, 30, 0.92) 100%);
+      justify-content: center;
+      padding: 50px 24px;
+      border: 1.5px solid rgba(203, 178, 145, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-header-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .hero-ornament-line {
+      width: 35px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--bead-gold));
+    }
+    .hero-ornament-line.right {
+      background: linear-gradient(90deg, var(--bead-gold), transparent);
+    }
+
+    .hero-title {
+      font-size: 1.35rem;
+      color: var(--bead-light);
+      letter-spacing: 6px;
+      font-weight: 600;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .names-display-lux {
+      font-family: 'Aref Ruqaa', serif;
+      font-size: 4.4rem;
+      color: #faf2e3;
+      line-height: 1.22;
+      text-shadow: 0 4px 25px rgba(0, 0, 0, 0.75), 0 0 20px rgba(203, 178, 145, 0.35);
+      position: relative;
+    }
+
+    .names-display-lux .amp {
+      font-family: 'Amiri', serif;
+      font-size: 2.6rem;
+      display: block;
+      color: var(--bead-gold);
+      margin: 4px 0;
+      text-shadow: 0 0 15px rgba(203, 178, 145, 0.5);
+    }
+
+    .hero-sub-verse {
+      font-size: 0.95rem;
+      color: var(--text-sub);
+      letter-spacing: 2px;
+      font-weight: 300;
+      margin-top: 15px;
+      opacity: 0.95;
+    }
+
+    .hero-meta-capsules {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 36px;
+      width: 100%;
+    }
+
+    .meta-capsule {
+      background: rgba(40, 32, 25, 0.65);
+      border: 1px solid rgba(203, 178, 145, 0.3);
+      backdrop-filter: blur(8px);
+      padding: 10px 22px;
+      border-radius: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      min-width: 115px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+    }
+
+    .meta-capsule i {
+      font-size: 1.25rem;
+      color: var(--bead-gold);
+    }
+
+    .meta-capsule-lbl {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+    }
+
+    .meta-capsule-val {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    /* =========================================
+       القسم 2: البسملة والمسافة الرحبة
+       ========================================= */
+    .basmala-wrapper {
+      margin-bottom: 42px;
+      width: 100%;
+      border: none !important;
+      padding-bottom: 0;
+    }
+
+    .basmala {
+      font-family: 'Amiri', serif;
+      font-size: 2.3rem;
+      color: var(--bead-light);
+      line-height: 1.4;
+      font-weight: 700;
+      text-shadow: 0 0 15px rgba(203, 178, 145, 0.4);
+    }
+
+    .parents-row-balanced {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      margin-bottom: 24px;
+      flex-wrap: nowrap;
+    }
+
+    .parent-name {
+      font-size: 1.12rem;
+      color: #ffffff;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .parents-amp {
+      font-family: 'Amiri', serif;
+      font-size: 1.35rem;
+      color: var(--bead-gold);
+      text-shadow: 0 0 10px rgba(203, 178, 145, 0.4);
+    }
+
+    .invitation-quote {
+      font-size: 1.05rem;
+      line-height: 2.5;
+      color: var(--text-sub);
+      font-weight: 300;
+      max-width: 330px;
+    }
+
+    .hosts-signature {
+      margin-top: 28px;
+      font-size: 1.6rem;
+      font-family: 'Aref Ruqaa', serif;
+      color: var(--bead-light);
+      font-weight: 700;
+    }
+
+    /* القسم 3: الموقع وورقة التقويم */
+    .location-venue {
+      font-size: 1.45rem;
+      color: #ffffff;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .location-sub {
+      font-size: 1.05rem;
+      color: var(--text-sub);
+      margin-bottom: 22px;
+    }
+
+    .calendar-paper {
+      background: #c8b8a6;
+      width: 240px;
+      margin: 0 auto 22px;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(25, 18, 14, 0.6);
+      color: #2b1f17;
+      border: 1.5px solid rgba(203, 178, 145, 0.45);
+    }
+
+    .cal-header {
+      background: #46382c;
+      color: var(--bead-light);
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .cal-number {
+      font-size: 4.8rem;
+      font-weight: 700;
+      line-height: 0.95;
+      font-family: 'Amiri', serif;
+      color: #271a12;
+      padding-top: 16px;
+    }
+
+    .cal-footer {
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #4b3a2d;
+      margin-top: 6px;
+    }
+
+    .cal-time {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #1f140e;
+      margin: 4px 0 12px 0;
+    }
+
+    .save-date-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #caa876, #8c7356);
+      border: none;
+      color: #140d08;
+      padding: 12px 32px;
+      border-radius: 18px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-bottom: 16px;
+      box-shadow: 0 6px 20px rgba(203, 178, 145, 0.35);
+    }
+
+    .countdown-title {
+      font-size: 1rem;
+      color: var(--bead-light);
+      font-weight: 700;
+      margin-top: 16px;
+      margin-bottom: 12px;
+    }
+
+    .countdown-boxes {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      direction: ltr;
+    }
+
+    .count-unit {
+      background: rgba(43, 34, 27, 0.8);
+      border: 1.5px solid rgba(203, 178, 145, 0.35);
+      border-radius: 16px;
+      width: 68px;
+      padding: 10px 0;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    }
+
+    .count-num {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--bead-light);
+    }
+
+    .count-lbl {
+      font-size: 0.76rem;
+      color: var(--text-sub);
+    }
+
+    /* =========================================================
+       تحسين سلاسة وانسيابية برنامج الحفل (Timeline)
+       ========================================================= */
+    .timeline-container {
+      position: relative;
+      margin: 24px auto;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .timeline-track {
+      position: absolute;
+      left: 50%;
+      top: 15px;
+      bottom: 15px;
+      width: 2px;
+      background: rgba(203, 178, 145, 0.2);
+      transform: translateX(-50%);
+    }
+
+    .timeline-progress {
+      position: absolute;
+      left: 50%;
+      top: 15px;
+      width: 2.5px;
+      height: 0%;
+      background: var(--bead-gold);
+      box-shadow: 0 0 12px var(--bead-gold);
+      transform: translateX(-50%);
+      transition: height 0.22s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .traveling-bead {
+      position: absolute;
+      left: 50%;
+      top: 15px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 3px solid var(--bead-gold);
+      box-shadow: 0 0 16px #ffffff, 0 0 25px var(--bead-gold);
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      pointer-events: none;
+      transition: top 0.22s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .tl-row {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 36px;
+      z-index: 2;
+      opacity: 0.35;
+      transform: scale(0.92);
+      transition: all 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .tl-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .tl-row.active {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .tl-time {
+      width: 44%;
+      text-align: left;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--bead-light);
+      direction: ltr;
+      transition: color 0.3s ease;
+    }
+
+    .tl-row.active .tl-time {
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(203, 178, 145, 0.4);
+    }
+
+    .tl-static-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(203, 178, 145, 0.4);
+      border: 2px solid #2b1d14;
+      transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .tl-row.active .tl-static-dot {
+      background: var(--bead-gold);
+      transform: scale(1.35);
+      box-shadow: 0 0 12px var(--bead-gold);
+    }
+
+    .tl-text {
+      width: 44%;
+      text-align: right;
+      font-size: 1.1rem;
+      color: #ffffff;
+      font-weight: 600;
+      transition: all 0.35s ease;
+    }
+
+    .tl-row.active .tl-text {
+      text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+    }
+
+    /* تنبيه إدارة الفندق */
+    .hotel-notice-card {
+      min-height: auto;
+      background: rgba(70, 48, 36, 0.88);
+      border: 2px dashed rgba(203, 178, 145, 0.55);
+      border-radius: 24px;
+      padding: 26px 22px;
+      color: #f7eed8;
+      font-size: 1.05rem;
+      line-height: 1.9;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    .hotel-notice-card i {
+      font-size: 1.35rem;
+      color: var(--bead-gold);
+      margin-left: 8px;
+    }
+
+    /* الختام وصورة العروسين */
+    .closing-text {
+      font-size: 1.2rem;
+      color: var(--bead-light);
+      line-height: 2.1;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .couple-display-frame {
+      width: 100%;
+      height: 320px;
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: 0 18px 45px rgba(25, 18, 14, 0.65);
+      border: 2px solid rgba(203, 178, 145, 0.45);
+      position: relative;
+      background: #251d17;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .couple-display-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* شريط الملاحة السفلي الثابت */
+    .glass-bottom-bar {
+      position: fixed;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 28px);
+      max-width: 412px;
+      background: rgba(50, 39, 30, 0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1.5px solid rgba(203, 178, 145, 0.4);
+      border-radius: 36px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 16px;
+      z-index: 990;
+      box-shadow: 0 10px 30px rgba(20, 14, 10, 0.7);
+    }
+
+    .bar-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-sub);
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .bar-item i {
+      font-size: 1.25rem;
+      color: var(--bead-gold);
+    }
+
+    /* نافذة تأكيد الحضور (RSVP) */
+    #rsvp-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(10px);
+      z-index: 10000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    #rsvp-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .rsvp-box {
+      width: 100%;
+      max-width: 360px;
+      background: #362a20;
+      border: 1.5px solid var(--bead-gold);
+      border-radius: 24px;
+      padding: 26px 20px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+      position: relative;
+    }
+
+    .close-modal-btn {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: none;
+      border: none;
+      color: var(--bead-light);
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    .rsvp-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(203, 178, 145, 0.35);
+      border-radius: 12px;
+      padding: 12px 14px;
+      color: #ffffff;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 0.95rem;
+      margin-top: 12px;
+      outline: none;
+      resize: none;
+    }
+
+    .rsvp-input:focus {
+      border-color: var(--bead-gold);
+    }
+
+    .rsvp-choice-btn {
+      width: 100%;
+      padding: 13px;
+      border-radius: 12px;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-top: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .rsvp-accept {
+      background: linear-gradient(135deg, #caa876, #8c7356);
+      color: #140d08;
+      border: none;
+    }
+
+    .rsvp-decline {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--bead-light);
+      border: 1px solid rgba(203, 178, 145, 0.35);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mobile-frame">
+
+    <div class="auto-scroll-pill" id="autoScrollBtn" onclick="toggleAutoScroll()">
+      <i class="fa-solid fa-play" id="scrollBtnIcon"></i>
+      <span id="scrollBtnText">تمرير تلقائي</span>
+    </div>
+
+    <div class="fabric-canvas"></div>
+    <canvas id="petals-canvas"></canvas>
+
+    <!-- شاشة الافتتاح بالختم العاجي -->
+    <div id="curtain-screen">
+      <div class="curtain-panel curtain-left"></div>
+      <div class="curtain-panel curtain-right"></div>
+      
+      <div class="seal-center-btn" onclick="openRoyalCurtain()">
+        <div class="exact-ivory-seal">
+          <div class="seal-branches-exact">❦ &nbsp; ❦ &nbsp; ❦</div>
+          
+          <div class="seal-center-content">
+            <div class="seal-names-exact">
+              إبراهيم
+              <span class="seal-amp-exact">&</span>
+              أصالة
+            </div>
+            <div class="seal-open-exact">OPEN</div>
+          </div>
+
+          <div class="seal-branches-exact">❦ &nbsp; ❦ &nbsp; ❦</div>
+        </div>
+        <div class="seal-hint">
+          <i class="fa-solid fa-sparkles"></i>
+          <span>المس الختم لفتح الدعوة</span>
+          <i class="fa-solid fa-sparkles"></i>
+        </div>
+      </div>
+    </div>
+
+    <main class="content-flow">
+
+      <!-- القسم 1: صفحة إبراهيم & أصالة الملكية الصافية الأصلية -->
+      <section class="section-card hero-card visible">
+        <div class="hero-header-box">
+          <div class="hero-ornament-line"></div>
+          <div class="hero-title">حفل زفاف</div>
+          <div class="hero-ornament-line right"></div>
+        </div>
+
+        <div class="names-display-lux">
+          إبراهيم
+          <span class="amp">&</span>
+          أصالة
+        </div>
+
+        <div class="hero-sub-verse">
+          بِدايةُ عُمرٍ جَدِيد وَفَرحَةٌ تَكتَمِلُ بِكُم 🤍
+        </div>
+
+        <div class="hero-meta-capsules">
+          <div class="meta-capsule">
+            <i class="fa-regular fa-clock"></i>
+            <span class="meta-capsule-lbl">مساءً</span>
+            <span class="meta-capsule-val">7:00</span>
+          </div>
+          <div class="meta-capsule">
+            <i class="fa-regular fa-calendar"></i>
+            <span class="meta-capsule-lbl">الأربعاء</span>
+            <span class="meta-capsule-val">2026.11.04</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider">
+        <div class="line"></div>
+        <div class="symbol">🤍</div>
+        <div class="line right"></div>
+      </div>
+
+      <!-- القسم 2: البسملة الصافية مع المسافة المريحة -->
+      <section class="section-card">
+        <div class="basmala-wrapper">
+          <div class="basmala">بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ</div>
+        </div>
+        
+        <div class="parents-row-balanced">
+          <span class="parent-name">جاسم محمد الجولاني</span>
+          <span class="parents-amp">&</span>
+          <span class="parent-name">رامي محمد المقابلة</span>
+        </div>
+        
+        <div class="invitation-quote">
+          بقلوب يملؤها الفرح<br>
+          ودعاء صادق أن يتم الله لنا ولكم الخير<br>
+          نتشرف بدعوتكم لمشاركتنا فرحة أبنائنا<br>
+          في يوم جمع الله فيه القلوب<br>
+          وكتب فيه بداية عمر جديد<br>
+          وجودكم بيننا شرف<br>
+          ومشاركتكم لنا تزيد الفرح فرحاً 🤍<br>
+          ننتظركم بكل محبة لتكتمل فرحتنا بحضوركم
+        </div>
+        <div class="hosts-signature">
+          إبراهيم & أصالة
+        </div>
+      </section>
+
+      <div class="section-divider">
+        <div class="line"></div>
+        <div class="symbol">✨</div>
+        <div class="line right"></div>
+      </div>
+
+      <!-- القسم 3: الموقع والتقويم والعداد -->
+      <section class="section-card">
+        <div class="section-badge-title">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>الموقع والتاريخ</span>
+        </div>
+
+        <div class="location-venue">فندق حيدر بلاس</div>
+        <div class="location-sub">ضاحية الرشيد</div>
+
+        <div class="calendar-paper">
+          <div class="cal-header">
+            <span>WED</span>
+            <span>NOVEMBER</span>
+            <span>2026</span>
+          </div>
+          <div class="cal-number">4</div>
+          <div class="cal-footer">WEDNESDAY</div>
+          <div class="cal-time">PM 7:00</div>
+        </div>
+
+        <button class="save-date-btn" onclick="addToCalendar()">
+          <i class="fa-regular fa-calendar-plus"></i>
+          <span>احفظ الموعد في التقويم</span>
+        </button>
+
+        <div class="countdown-title">العد التنازلي لليلة العمر</div>
+        <div class="countdown-boxes">
+          <div class="count-unit">
+            <div class="count-num" id="days">--</div>
+            <div class="count-lbl">أيام</div>
+          </div>
+          <div class="count-unit">
+            <div class="count-num" id="hours">--</div>
+            <div class="count-lbl">ساعات</div>
+          </div>
+          <div class="count-unit">
+            <div class="count-num" id="minutes">--</div>
+            <div class="count-lbl">دقائق</div>
+          </div>
+          <div class="count-unit">
+            <div class="count-num" id="seconds">--</div>
+            <div class="count-lbl">ثواني</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider">
+        <div class="line"></div>
+        <div class="symbol">⏳</div>
+        <div class="line right"></div>
+      </div>
+
+      <!-- القسم 4: برنامج الحفل والتايم لاين المحسن فائق السلاسة -->
+      <section class="section-card" id="timelineSection">
+        <div class="section-badge-title">
+          <i class="fa-regular fa-clock"></i>
+          <span>برنامج الحفل</span>
+        </div>
+
+        <div class="timeline-container" id="timelineBox">
+          <div class="timeline-track"></div>
+          <div class="timeline-progress" id="timelineProgress"></div>
+          <div class="traveling-bead" id="travelingBead"></div>
+
+          <div class="tl-row" data-index="0">
+            <div class="tl-time">6:45 PM</div>
+            <div class="tl-static-dot"></div>
+            <div class="tl-text">الوصول</div>
+          </div>
+
+          <div class="tl-row" data-index="1">
+            <div class="tl-time">7:00 PM</div>
+            <div class="tl-static-dot"></div>
+            <div class="tl-text">الزفة</div>
+          </div>
+
+          <div class="tl-row" data-index="2">
+            <div class="tl-time">7:30 PM</div>
+            <div class="tl-static-dot"></div>
+            <div class="tl-text">دخول العروسين</div>
+          </div>
+
+          <div class="tl-row" data-index="3">
+            <div class="tl-time">9:00 PM</div>
+            <div class="tl-static-dot"></div>
+            <div class="tl-text">تناول العشاء</div>
+          </div>
+
+          <div class="tl-row" data-index="4">
+            <div class="tl-time">10:00 PM</div>
+            <div class="tl-static-dot"></div>
+            <div class="tl-text">الاحتفال والتصوير</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- القسم 5: تنبيه إدارة الفندق -->
+      <section class="hotel-notice-card">
+        <i class="fa-solid fa-bell"></i>
+        <strong>تنويه لطيف:</strong> بناءً على تعليمات إدارة الفندق وحرصاً على راحة وهدوء الحفل، يمنع اصطحاب الأطفال، شاكرين لكم طيب تفهمكم ولطفكم.
+      </section>
+
+      <div class="section-divider">
+        <div class="line"></div>
+        <div class="symbol">🤍</div>
+        <div class="line right"></div>
+      </div>
+
+      <!-- القسم 6: الختام مع مسار صورة العروسين المباشر -->
+      <section class="section-card">
+        <div class="closing-text">
+          بدأت حكايتنا بحب، وتكتمل فرحتنا بوجودكم معنا. 🤍
+        </div>
+
+        <div class="couple-display-frame">
+          <!-- إذا رفعت الصورة بجانب index.html باسم couple.jpg ستعمل مباشرة -->
+          <img id="coupleImg" src="couple.jpg" alt="صورة العروسين" onerror="this.src='https://i.postimg.cc/w1B4TFVg/image.jpg'">
+        </div>
+
+        <div style="margin-top: 24px;">
+          <div style="font-family: 'Aref Ruqaa', serif; font-size: 1.8rem; color: var(--bead-light);">إبراهيم & أصالة</div>
+          <div style="font-size: 0.95rem; color: var(--text-sub); margin-top: 4px; font-weight: 700;">04.11.2026</div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- شريط الملاحة السفلي -->
+    <nav class="glass-bottom-bar">
+      <div class="bar-item" onclick="openRSVP()">
+        <i class="fa-regular fa-circle-check"></i>
+        <span>تأكيد الحضور</span>
+      </div>
+
+      <a href="https://maps.app.goo.gl/8Szxav8EECMRyAHe8" target="_blank" class="bar-item">
+        <i class="fa-solid fa-location-dot"></i>
+        <span>الموقع</span>
+      </a>
+
+      <div class="bar-item" onclick="togglePlayMusic()">
+        <i class="fa-solid fa-music" id="music-btn-icon"></i>
+        <span>الموسيقى</span>
+      </div>
+
+      <a href="https://wa.me/962779863541" target="_blank" class="bar-item">
+        <i class="fa-solid fa-phone"></i>
+        <span>تواصل معنا</span>
+      </a>
+    </nav>
+
+  </div>
+
+  <!-- نافذة تأكيد الحضور المربوطة بواتساب -->
+  <div id="rsvp-modal">
+    <div class="rsvp-box">
+      <button class="close-modal-btn" onclick="closeRSVP()">&times;</button>
+      <div style="font-size: 1.3rem; color: var(--bead-light); font-weight: 700; margin-bottom: 4px;">تأكيد الحضور</div>
+      <p style="font-size: 0.88rem; color: var(--text-sub); margin-bottom: 6px;">يسعدنا ويشرفنا حضوركم ومشاركتنا فرحتنا 🤍</p>
+      
+      <input type="text" id="guestName" class="rsvp-input" placeholder="الاسم الكريم">
+      <input type="number" id="guestCount" class="rsvp-input" placeholder="عدد الأفراد المرافقين (اختياري)">
+      <textarea id="guestWishes" class="rsvp-input" rows="2" placeholder="كلمة طيبة أو رسالة لطيفة للعروسين (اختياري)..."></textarea>
+
+      <button class="rsvp-choice-btn rsvp-accept" onclick="submitRSVP(true)">
+        <i class="fa-solid fa-heart"></i>
+        <span>سأحضر بإذن الله</span>
+      </button>
+
+      <button class="rsvp-choice-btn rsvp-decline" onclick="submitRSVP(false)">
+        <span>لن أتمكن من الحضور (مع أطيب التمنيات)</span>
+      </button>
+    </div>
+  </div>
+
+  <audio id="wedding-audio" loop>
+    <source id="audio-source" src="https://files.catbox.moe/lonrch.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    const curtainScreen = document.getElementById('curtain-screen');
+    const audioTrack = document.getElementById('wedding-audio');
+    const musicIcon = document.getElementById('music-btn-icon');
+    let isPlaying = false;
+    let hasOpened = false;
+
+    function openRoyalCurtain() {
+      if (hasOpened) return;
+      hasOpened = true;
+
+      curtainScreen.classList.add('opened');
+      triggerPetalBurst();
+
+      audioTrack.play().then(() => {
+        isPlaying = true;
+        musicIcon.classList.remove('fa-music');
+        musicIcon.classList.add('fa-pause');
+      }).catch(err => console.log('Autoplay blocked:', err));
+
+      // اختفاء شاشة الافتتاح وبدء النزول التلقائي بعد نصف ثانية (500ms) تماماً
+      setTimeout(() => {
+        curtainScreen.style.display = 'none';
+        document.getElementById('autoScrollBtn').classList.add('visible');
+        setTimeout(startAutoScroll, 500);
+      }, 1300);
+    }
+
+    function togglePlayMusic() {
+      if (!isPlaying) {
+        audioTrack.play().then(() => {
+          isPlaying = true;
+          musicIcon.classList.remove('fa-music');
+          musicIcon.classList.add('fa-pause');
+        });
+      } else {
+        audioTrack.pause();
+        isPlaying = false;
+        musicIcon.classList.remove('fa-pause');
+        musicIcon.classList.add('fa-music');
+      }
+    }
+
+    let autoScrollInterval = null;
+    let isAutoScrolling = false;
+    const scrollSpeed = 0.75;
+
+    function startAutoScroll() {
+      if (isAutoScrolling) return;
+      isAutoScrolling = true;
+      updateScrollButton(true);
+
+      autoScrollInterval = setInterval(() => {
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        if (window.scrollY >= maxScroll - 5) {
+          stopAutoScroll();
+        } else {
+          window.scrollBy({ top: scrollSpeed, behavior: 'auto' });
+        }
+      }, 16);
+    }
+
+    function stopAutoScroll() {
+      if (!isAutoScrolling) return;
+      isAutoScrolling = false;
+      clearInterval(autoScrollInterval);
+      updateScrollButton(false);
+    }
+
+    function toggleAutoScroll() {
+      if (isAutoScrolling) {
+        stopAutoScroll();
+      } else {
+        startAutoScroll();
+      }
+    }
+
+    function updateScrollButton(active) {
+      const icon = document.getElementById('scrollBtnIcon');
+      const text = document.getElementById('scrollBtnText');
+      if (active) {
+        icon.className = 'fa-solid fa-pause';
+        text.textContent = 'إيقاف النزول';
+      } else {
+        icon.className = 'fa-solid fa-play';
+        text.textContent = 'تمرير تلقائي';
+      }
+    }
+
+    window.addEventListener('touchstart', () => stopAutoScroll(), { passive: true });
+    window.addEventListener('wheel', () => stopAutoScroll(), { passive: true });
+
+    function openRSVP() {
+      stopAutoScroll();
+      document.getElementById('rsvp-modal').classList.add('active');
+    }
+    function closeRSVP() {
+      document.getElementById('rsvp-modal').classList.remove('active');
+    }
+
+    function submitRSVP(willAttend) {
+      const name = document.getElementById('guestName').value.trim();
+      const count = document.getElementById('guestCount').value || "1";
+      const wishes = document.getElementById('guestWishes').value.trim();
+      
+      if (!name) {
+        alert('يرجى كتابة الاسم الكريم أولاً');
+        return;
+      }
+
+      const statusText = willAttend ? "سأحضر بإذن الله 🤍" : "أعتذر عن الحضور، مع أطيب التمنيات";
+      const targetPhone = "962779863541";
+      
+      let messageContent = 
+        `تأكيد حضور حفل زفاف إبراهيم & أصالة 🤍\n` +
+        `الاسم: ${name}\n` +
+        `الحالة: ${statusText}\n` +
+        `عدد المرافقين: ${count}`;
+
+      if (wishes) {
+        messageContent += `\nرسالة للعروسين: ${wishes}`;
+      }
+
+      window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(messageContent)}`, '_blank');
+      closeRSVP();
+    }
+
+    const cards = document.querySelectorAll('.section-card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    cards.forEach(card => observer.observe(card));
+
+    /* حركة التايم لاين المحسنة والناعمة جداً */
+    const timelineBox = document.getElementById('timelineBox');
+    const timelineProgress = document.getElementById('timelineProgress');
+    const travelingBead = document.getElementById('travelingBead');
+    const tlRows = document.querySelectorAll('.tl-row');
+
+    function updateTimelineMotion() {
+      if (!timelineBox) return;
+      const rect = timelineBox.getBoundingClientRect();
+      const triggerY = window.innerHeight * 0.52;
+
+      if (rect.top <= triggerY && rect.bottom >= triggerY - rect.height) {
+        let progress = (triggerY - rect.top) / rect.height;
+        progress = Math.max(0, Math.min(1, progress));
+
+        const beadTop = progress * rect.height;
+        travelingBead.style.top = `${beadTop}px`;
+        timelineProgress.style.height = `${progress * 100}%`;
+
+        tlRows.forEach(row => {
+          const rowCenter = row.offsetTop + (row.offsetHeight / 2);
+          if (Math.abs(rowCenter - beadTop) < 24 || rowCenter <= beadTop) {
+            row.classList.add('active');
+          } else {
+            row.classList.remove('active');
+          }
+        });
+      }
+    }
+
+    window.addEventListener('scroll', () => {
+      requestAnimationFrame(updateTimelineMotion);
+    }, { passive: true });
+    updateTimelineMotion();
+
+    const canvas = document.getElementById('petals-canvas');
+    const ctx = canvas.getContext('2d');
+    let items = [];
+
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class FallingItem {
+      constructor(isBurst = false) {
+        this.isBurst = isBurst;
+        this.init();
+      }
+      init() {
+        if (this.isBurst) {
+          this.x = canvas.width / 2;
+          this.y = canvas.height / 2;
+          const angle = Math.random() * Math.PI * 2;
+          const speed = Math.random() * 6 + 2;
+          this.speedX = Math.cos(angle) * speed;
+          this.speedY = Math.sin(angle) * speed;
+          this.size = Math.random() * 6 + 3;
+          this.opacity = 1;
+          this.isPetal = Math.random() > 0.4;
+          this.rot = Math.random() * Math.PI;
+          this.rotSpeed = (Math.random() - 0.5) * 0.08;
+        } else {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * -canvas.height;
+          this.size = Math.random() * 5 + 2.5;
+          this.speedY = Math.random() * 1.2 + 0.6;
+          this.speedX = Math.sin(Math.random() * 5) * 0.4;
+          this.opacity = Math.random() * 0.65 + 0.25;
+          this.isPetal = Math.random() > 0.5;
+          this.rot = Math.random() * Math.PI;
+          this.rotSpeed = (Math.random() - 0.5) * 0.03;
+          this.swing = Math.random() * 2;
+          this.swingStep = Math.random() * 0.02 + 0.01;
+        }
+      }
+      update() {
+        if (this.isBurst) {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          this.speedY += 0.05;
+          this.opacity -= 0.014;
+        } else {
+          this.swing += this.swingStep;
+          this.x += Math.sin(this.swing) * 0.6;
+          this.y += this.speedY;
+          this.rot += this.rotSpeed;
+
+          if (this.y > canvas.height + 15) {
+            this.y = -15;
+            this.x = Math.random() * canvas.width;
+          }
+        }
+      }
+      draw() {
+        if (this.opacity <= 0) return;
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rot);
+        ctx.globalAlpha = this.opacity;
+
+        if (this.isPetal) {
+          ctx.beginPath();
+          ctx.ellipse(0, 0, this.size, this.size * 0.55, 0, 0, Math.PI * 2);
+          const grad = ctx.createLinearGradient(-this.size, 0, this.size, 0);
+          grad.addColorStop(0, '#fbf4e6');
+          grad.addColorStop(1, '#caa876');
+          ctx.fillStyle = grad;
+          ctx.shadowBlur = 6;
+          ctx.shadowColor = 'rgba(203, 178, 145, 0.4)';
+          ctx.fill();
+        } else {
+          ctx.beginPath();
+          ctx.arc(0, 0, this.size * 0.4, 0, Math.PI * 2);
+          ctx.fillStyle = '#fceabb';
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = '#caa876';
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 40; i++) items.push(new FallingItem(false));
+
+    function triggerPetalBurst() {
+      for (let i = 0; i < 45; i++) {
+        items.push(new FallingItem(true));
+      }
+    }
+
+    function renderFalling() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = items.length - 1; i >= 0; i--) {
+        const item = items[i];
+        item.update();
+        item.draw();
+        if (item.isBurst && item.opacity <= 0) {
+          items.splice(i, 1);
+        }
+      }
+      requestAnimationFrame(renderFalling);
+    }
+    renderFalling();
+
+    const weddingDate = new Date('2026-11-04T19:00:00+03:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = weddingDate - now;
+
+      if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('days').textContent = days;
+        document.getElementById('hours').textContent = hours;
+        document.getElementById('minutes').textContent = minutes;
+        document.getElementById('seconds').textContent = seconds;
+      } else {
+        document.querySelector('.countdown-boxes').innerHTML = "<div style='font-size: 1rem; color: #caa876;'>مرحباً بكم في ليلة العمر!</div>";
+      }
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    function addToCalendar() {
+      const icsData = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:حفل زفاف إبراهيم & أصالة\nLOCATION:فندق حيدر بلاس - ضاحية الرشيد\nDTSTART:20261104T160000Z\nDTEND:20261104T210000Z\nDESCRIPTION:حفل زفاف إبراهيم وأصالة\nEND:VEVENT\nEND:VCALENDAR`;
+      const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute('download', 'wedding-invite.ics');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>
